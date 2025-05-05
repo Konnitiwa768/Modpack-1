@@ -30,8 +30,12 @@ jobs:
           curl -L -o mods/OptiForge.jar "https://edge.forgecdn.net/files/4329/838/OptiForge-MC1.18.2-0.5.8.jar"
           echo "::notice::OptiFine.jar is not downloaded. Please add it manually to mods/ before pushing."
 
-      - name: Commit and Push all Mods (including manual OptiFine)
+      - name: 変更をコミット
         run: |
-          git add mods/
-          git commit -m "Add mods including manually added OptiFine"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "置き換え"
+          git push https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
