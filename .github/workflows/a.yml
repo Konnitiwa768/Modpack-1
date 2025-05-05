@@ -26,10 +26,7 @@ jobs:
           curl -L -o mods/Create.jar "https://edge.forgecdn.net/files/4371/807/create-0.5.0i-1.18.2.jar"
           curl -L -o mods/JEI.jar "https://edge.forgecdn.net/files/3788/739/jei-1.18.2-9.7.0.195.jar"
           curl -L -o mods/SpartanWeaponry.jar "https://edge.forgecdn.net/files/5256/293/SpartanWeaponry-3.0.5-all.jar"
-          curl -L -o mods/LycanitesMobs.jar "https://edge.forgecdn.net/files/2527/735/LycanitesMobsComplete%201.18.2.0.jar"
-          curl -L -o mods/OptiForge.jar "https://edge.forgecdn.net/files/4329/838/OptiForge-MC1.18.2-0.5.8.jar"
-          echo "::notice::OptiFine.jar is not downloaded. Please add it manually to mods/ before pushing."
-
+          # curl -L -o mods/LycanitesMobs.jar "https://edge.forgecdn.net/files/2527/735/LycanitesMobsComplete%201.18.2.0.jar"
       - name: 変更をコミット
         run: |
           git config --global user.name "GitHub Actions"
