@@ -1,0 +1,39 @@
+name: SSH Push Mods
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  push_mods:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Download Mods (excluding OptiFine)
+        run: |
+          mkdir -p mods
+          curl -L -o mods/IceAndFire.jar "https://edge.forgecdn.net/files/4614/465/iceandfire-2.1.12-1.18.2.jar"
+          curl -L -o mods/Create.jar "https://edge.forgecdn.net/files/4371/807/create-0.5.0i-1.18.2.jar"
+          curl -L -o mods/JEI.jar "https://edge.forgecdn.net/files/3788/739/jei-1.18.2-9.7.0.195.jar"
+          curl -L -o mods/SpartanWeaponry.jar "https://edge.forgecdn.net/files/5256/293/SpartanWeaponry-3.0.5-all.jar"
+
+      - name: Commit and Push Mods
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Modファイルを更新" || echo "変更なし"
+          git push git@github.com:Konnitiwa768/Modpack-1.git HEAD:main
