@@ -30,7 +30,7 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git remote set-url origin https://x-access-token:$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@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
           git add .
           git commit -m "Modファイルを更新" || echo "コミットする変更はありません"
           git push origin HEAD:main
