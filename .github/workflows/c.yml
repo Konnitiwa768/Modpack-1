@@ -38,6 +38,7 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
+          git config --global credential.helper store
           git add .
           git commit -m "Modファイルを更新" || echo "変更なし"
           git push
