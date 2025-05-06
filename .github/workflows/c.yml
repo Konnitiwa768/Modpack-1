@@ -1,4 +1,4 @@
-name: SSH Push Mods
+name: Download and Push Mods to Repo (with gh)
 
 on:
   workflow_dispatch:
@@ -14,15 +14,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Setup SSH
+      - name: Install GitHub CLI
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.ACTIONS_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          sudo apt update
+          sudo apt install gh -y
 
-          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+      - name: Authenticate with GitHub CLI
+        run: |
+          echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
 
-      - name: Download Mods (excluding OptiFine)
+      - name: Set Git Identity
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Download Mods
         run: |
           mkdir -p mods
           curl -L -o mods/IceAndFire.jar "https://edge.forgecdn.net/files/4614/465/iceandfire-2.1.12-1.18.2.jar"
@@ -30,10 +36,8 @@ jobs:
           curl -L -o mods/JEI.jar "https://edge.forgecdn.net/files/3788/739/jei-1.18.2-9.7.0.195.jar"
           curl -L -o mods/SpartanWeaponry.jar "https://edge.forgecdn.net/files/5256/293/SpartanWeaponry-3.0.5-all.jar"
 
-      - name: Commit and Push Mods
+      - name: Commit and Push Changes
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
           git add .
           git commit -m "Modファイルを更新" || echo "変更なし"
-          git push git@github.com:Konnitiwa768/Modpack-1.git HEAD:main
+          git push
