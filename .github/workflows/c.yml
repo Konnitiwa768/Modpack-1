@@ -41,4 +41,4 @@ jobs:
           git config --global credential.helper store
           git add .
           git commit -m "Modファイルを更新" || echo "変更なし"
-          git push
+          git push -v origin main
