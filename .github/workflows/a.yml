@@ -29,9 +29,7 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git add .
-          git commit -m "Modファイルを更新" || echo "No changes to commit"
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
-          git push origin main --force
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          git add .
+          git commit -m "Modファイルを更新" || echo "コミットする変更はありません"
+          git push origin HEAD:main
