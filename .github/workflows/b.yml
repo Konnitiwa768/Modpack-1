@@ -27,7 +27,7 @@ jobs:
           curl -L -o mods/JEI.jar "https://www.curseforge.com/minecraft/mc-mods/jei/download/5846864"
           curl -L -o mods/SpartanWeaponry.jar "https://www.curseforge.com/minecraft/mc-mods/spartan-weaponry/download/5125579"
           curl -L -o mods/FarmersDelight.jar "https://www.curseforge.com/minecraft/mc-mods/farmers-delight/download/4679315"
-
+          curl -L -o mods/SpartanFire.jar "https://www.curseforge.com/minecraft/mc-mods/spartan-weaponry-ice-and-fire/download/5500916"
       - name: Commit and Push Changes
         run: |
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
