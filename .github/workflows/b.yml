@@ -27,7 +27,6 @@ jobs:
           curl -L -o mods/JEI.jar "https://www.curseforge.com/minecraft/mc-mods/jei/download/5846864"
           curl -L -o mods/SpartanWeaponry.jar "https://www.curseforge.com/minecraft/mc-mods/spartan-weaponry/download/5125579"
           curl -L -o mods/Farmer'sDelight.jar "https://www.curseforge.com/minecraft/mc-mods/farmers-delight/download/4679315
-          curl 
 
       - name: Commit and Push Changes
         run: |
