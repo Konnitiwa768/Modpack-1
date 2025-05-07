@@ -28,7 +28,7 @@ jobs:
           curl -L -o mods/SpartanWeaponry.jar "https://www.curseforge.com/minecraft/mc-mods/spartan-weaponry/download/5125478"
           curl -L -o mods/FarmersDelight.jar "https://www.curseforge.com/minecraft/mc-mods/farmers-delight/download/3765350"
           curl -L -o mods/SpartanFire.jar "https://www.curseforge.com/minecraft/mc-mods/spartan-weaponry-ice-and-fire/download/3858947"
-          curl -L -o　mods/Lycanitesmobs.jar "https://www.curseforge.com/minecraft/mc-mods/lycanites-mobs/download/5982776"
+          curl -L -o mods/Lycanitesmobs.jar "https://www.curseforge.com/minecraft/mc-mods/lycanites-mobs/download/5982776"
       - name: Commit and Push Changes
         run: |
           git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
